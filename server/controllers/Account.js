@@ -10,7 +10,7 @@ const signupPage = (req, res) => {
 };
 
 const logout = (req, res) => {
-    req.session.destroy();
+  req.session.destroy();
   res.redirect('/');
 };
 
@@ -61,8 +61,8 @@ const signup = (request, response) => {
     const newAccount = new Account.AccountModel(accountData);
     const savePromise = newAccount.save();
     savePromise.then(() => {
-        req.session.account = Account.AccountModel.toAPI(newAccount);
-        res.json({ redirect: '/maker' });
+      req.session.account = Account.AccountModel.toAPI(newAccount);
+      res.json({ redirect: '/maker' });
     });
 
     savePromise.catch((err) => {
