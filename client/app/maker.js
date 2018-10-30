@@ -16,7 +16,9 @@ const handleDomo = (e) => {
         return false;
     }
 
-    sendAjax('POST', $("#domoForm").attr("action"), $("domoForm").serialize(), function() {
+    console.log($("input[name=_csrf]").val());
+
+    sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function() {
         loadDomosFromServer();
     });
     return false;
