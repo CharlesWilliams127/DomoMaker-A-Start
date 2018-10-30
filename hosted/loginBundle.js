@@ -69,10 +69,10 @@ var LoginWindow = function LoginWindow(props) {
 var SignupWindow = function SignupWindow(props) {
     return React.createElement(
         "form",
-        { id: "loginForm",
-            name: "loginFom",
-            onSubmit: handleLogin,
-            action: "/login",
+        { id: "signupForm",
+            name: "signupForm",
+            onSubmit: handleSignup,
+            action: "/signup",
             method: "POST",
             className: "mainForm"
         },
@@ -116,7 +116,25 @@ var setup = function setup(csrf) {
         createSignupWindow(csrf);
         return false;
     });
+
+    loginButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        createLoginWindow(csrf);
+        return false;
+    });
+
+    createLoginWindow(csrf);
 };
+
+var getToken = function getToken() {
+    sendAjax('GET', '/getToken', null, function (result) {
+        setup(result.csrfToken);
+    });
+};
+
+$(document).ready(function () {
+    getToken();
+});
 "use strict";
 
 var handleError = function handleError(message) {

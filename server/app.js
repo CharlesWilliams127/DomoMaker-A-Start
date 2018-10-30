@@ -22,10 +22,10 @@ mongoose.connect(dbURL, (err) => {
   }
 });
 
-let redisURL ={
+let redisURL = {
   hostname: 'localhost',
   port: 6379,
-}
+};
 
 let redisPASS;
 
