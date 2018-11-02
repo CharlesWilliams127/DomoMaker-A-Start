@@ -39,7 +39,7 @@ DomoSchema.statics.toAPI = (doc) => ({
   // _id is built into your mongo document and is guaranteed to be unique
   name: doc.name,
   age: doc.age,
-  height: doc.height
+  height: doc.height,
 });
 
 DomoSchema.statics.findByOwner = (ownerId, callback) => {

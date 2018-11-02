@@ -24,8 +24,10 @@ const makeDomo = (req, res) => {
     owner: req.session.account._id,
   };
 
-  const query = Domo.DomoModel.findOneAndUpdate({'name': req.body.name, 'owner': req.session.account._id}, domoData, {upsert:true});
-  
+  const query = Domo.DomoModel.findOneAndUpdate(
+    { name: req.body.name, owner: req.session.account._id },
+     domoData, { upsert: true });
+
   const domoPromise = query.exec();
   domoPromise.then(() => res.json({ redirect: '/maker' }));
 
@@ -38,7 +40,6 @@ const makeDomo = (req, res) => {
   });
 
   return domoPromise;
-
 };
 
 const getDomos = (request, response) => {
