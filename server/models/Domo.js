@@ -19,6 +19,11 @@ const DomoSchema = new mongoose.Schema({
     min: 0,
     required: true,
   },
+  height: {
+    type: Number,
+    min: 0,
+    required: true,
+  },
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -34,6 +39,7 @@ DomoSchema.statics.toAPI = (doc) => ({
   // _id is built into your mongo document and is guaranteed to be unique
   name: doc.name,
   age: doc.age,
+  height: doc.height
 });
 
 DomoSchema.statics.findByOwner = (ownerId, callback) => {
@@ -41,8 +47,26 @@ DomoSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertID(ownerId),
   };
 
-  return DomoModel.find(search).select('name age').exec(callback);
+  return DomoModel.find(search).select('name age height').exec(callback);
 };
+
+DomoSchema.statics.findByName = (ownerId, nameSearch, callback) => {
+  const search = {
+    owner: convertID(ownerId),
+    name: nameSearch,
+  };
+
+  return DomoModel.find(search).select('name age height').exec(callback);
+};
+
+// DomoSchema.statics.updateByName = (ownerId, nameSearch, updateVals, callback) => {
+//   const search = {
+//     owner: convertID(ownerId),
+//     name: nameSearch,
+//   };
+
+//   return DomoModel.update(search, updateVals, {upsert: false}).exec(callback);
+// };
 
 DomoModel = mongoose.model('Domo', DomoSchema);
 
